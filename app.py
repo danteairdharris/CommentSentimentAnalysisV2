@@ -11,6 +11,16 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import pickle
+from selenium.webdriver.chrome.options import Options
+import os, sys
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
+
+# @st.experimental_singleton
+# def installff():
+#     os.system('sbase install chromedriver')
+#     os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/chromedriver /home/appuser/venv/bin/chromedriver')
 
 
 def load_data(filename):
@@ -80,6 +90,14 @@ def sk_test(corpus):
     pred = model.predict(test_vec)
     return pred
 
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.add_argument('--headless')
+# chrome_options.add_argument('--no-sandbox')
+# chrome_options.add_argument('--disable-dev-shm-usage')
+
+# _ = installff()
+
+
 model = load_data('./logreg_model.pickle')
 fit_vec = load_data('./fit_vector.pickle')
 
@@ -112,7 +130,13 @@ with top_container:
 
 
         if search and len(title) > 0:
-            driver = webdriver.Chrome('chromedriver')
+            firefoxOptions = Options()
+            firefoxOptions.add_argument("--headless")
+            service = Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(
+                options=firefoxOptions,
+                service=service,
+            )
             scrapecomments(title, param)
             driver.quit()
             
