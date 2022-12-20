@@ -15,7 +15,7 @@ from selenium.webdriver.chrome.options import Options
 import os, sys
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
 # @st.experimental_singleton
 # def installff():
@@ -90,10 +90,10 @@ def sk_test(corpus):
     pred = model.predict(test_vec)
     return pred
 
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument('--headless')
-# chrome_options.add_argument('--no-sandbox')
-# chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
 
 # _ = installff()
 
@@ -130,11 +130,10 @@ with top_container:
 
 
         if search and len(title) > 0:
-            firefoxOptions = Options()
-            firefoxOptions.add_argument("--headless")
-            service = Service(GeckoDriverManager().install())
-            driver = webdriver.Firefox(
-                options=firefoxOptions,
+
+            service = Service(ChromeDriverManager().install())
+            driver = webdriver.Chrome(
+                options=chrome_options,
                 service=service,
             )
             scrapecomments(title, param)
