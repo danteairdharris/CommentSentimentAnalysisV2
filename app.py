@@ -124,8 +124,7 @@ with top_container:
 
             service = Service(ChromeDriverManager().install())
             driver = webdriver.Chrome(
-                options=chrome_options,
-                service=service,
+                options=chrome_options
             )
             scrapecomments(title, param)
             driver.quit()
