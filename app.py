@@ -122,7 +122,11 @@ with top_container:
 
         if search and len(title) > 0:
 
-            service = Service(ChromeDriverManager().install())
+#             service = Service(ChromeDriverManager().install())
+#             driver = webdriver.Chrome(
+#                 options=chrome_options,
+#                 service=service,
+#             )
             driver = webdriver.Chrome(
                 options=chrome_options
             )
