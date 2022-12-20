@@ -13,14 +13,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import pickle
 from selenium.webdriver.chrome.options import Options
 import os, sys
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-
-# @st.experimental_singleton
-# def installff():
-#     os.system('sbase install chromedriver')
-#     os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/chromedriver /home/appuser/venv/bin/chromedriver')
 
 
 def load_data(filename):
@@ -94,8 +87,6 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-
-# _ = installff()
 
 
 model = load_data('./logreg_model.pickle')
